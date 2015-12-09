@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="CharGen" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>character database</title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+</head>
+<body>
+	<div id="header">character database</div>
+	<div id="content-wrapper" ngchargen>
+		<h3>Total Chars: {{ chargen.totalChars() }}</h3>
+		<hr>
+
+		<div id="chars-container" ng-repeat="char in chargen.chars">
+			<div class="char-info-container">
+				<strong>Name: </strong>{{ char.name }}<br>
+				<strong>Strain: </strong>{{ char.strain }}<br>
+				<span ng-show="show"><strong>Backstory: </strong>{{ char.backstory }}</span><br>
+				<button href ng-click="show = !show">show backstory</button><br>
+				<button ng-click="chargen.populateForm(char)">edit</button>
+				<button ng-click="chargen.deleteChar(char)">delete</button>
+			</div>
+			<br>
+		</div> <!-- close chars-container -->
+
+		<hr>
+		<h3>new character form</h3>
+		<form>
+			<label>Name</label>
+			<input type="text" ng-model="chargen.formCharName"><br>
+			<label>Strain</label>
+			<input type="text" ng-model="chargen.formCharStrain"><br>
+			<label>Backstory</label>
+			<input type="text" ng-model="chargen.formCharBackstory"><br>
+			<button ng-click="chargen.addChar()">add character</button>
+			<button ng-click="chargen.editChar()">edit character</button>
+		</form>
+
+
+	</div><!-- End of content-wrapper -->
+
+</body>
+</html>
