@@ -1,1 +1,97 @@
-var app = angular.module('CharGen', [])
+var app = angular.module('CharGen', []).directive('ngchargen', function() {
+
+	return {
+
+		controllerAs: 'chargen',
+		controller: ['$http', function charsCtrl($http) {
+			this.$http = $http;
+
+			var self = this;
+			self.chars = [];
+			self.totalChars = 0;
+
+			this.totalChars = function() {
+				return self.chars.length;
+			}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// VIEW ALL CHARACTERs /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			this.getChars = function() {
+				console.log('getting all chars');
+				// ajax get request to /chars
+				self.$http.get('/chars').then(function(response) {
+					self.chars = response.data;
+				});
+
+				return self.chars;
+			};
+
+			self.getChars()
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ADD CHARACTER ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			this.addChar = function() {
+				self.$http.post('/chars', {name: this.formCharName, strain: this.formCharStrain, backstory: this.formCharBackstory, imgurl: this.formCharimgURL}).then(function success(response) {
+					self.chars.push(response.data);
+					self.formCharName = '';
+					self.formCharStrain = '';
+					self.formCharBackstory = '';
+					self.formCharimgURL = '';
+				}, function error() {
+					console.log('error');
+				});
+			}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// EDIT CHARACTER //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			this.populateForm = function(char) {
+// POPULATE FORM =====================================//
+				self.formCharId = char._id;
+				self.formCharName = char.name;
+				self.formCharStrain = char.strain;
+				self.formCharBackstory = char.backstory;
+				self.formCharimgURL = char.imgURL;
+
+			};
+
+// THEN SAVE CHARACTER ================================//
+			this.editChar = function() {
+				var id = this.formCharId;
+				self.$http.put('/chars/' + id, {name: this.formCharName, strain: this.formCharStrain, backstory: this.formCharBackstory, imgurl: this.formCharimgURL }).then(function success (response) {
+					console.log(response);
+					self.getChars();
+
+// EMPTY FORM ========================================//
+					self.formCharId = '';
+					self.formCharName = '';
+					self.formCharStrain = '';
+					self.formCharBackstory = '';
+					self.formCharimgURL = '';
+				}, function error() {
+					console.log('error');
+				});
+			}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// DELETE CHARACTER ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			this.deleteChar = function(char) {
+				// Now that it's populated
+				var id = char._id;
+				self.$http.delete('/chars/' + id).then(function success (response) {
+					console.log(response);
+					self.getChars();
+				}, function error() {
+					console.log('error');
+				});
+			}
+
+		}] // close controller
+
+	} // close return object
+
+}) // close directive

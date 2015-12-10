@@ -19,9 +19,8 @@
 <!-- BOOTSTRAP JS/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-<!-- MY JS FILES /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- MY JS FILE //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<script type="text/javascript" src="js/app.js"></script>
-	<script type="text/javascript" src="js/controllers/CharCtrl.js"></script>
 
 </head>
 
@@ -30,19 +29,19 @@
   <div id="sidebar">
 		<nav>
 			<h2>character database<h2>
-			<button class="btn btn-sml" data-toggle="modal" data-target="#newModal">add new character</button>
+			<button class="btn btn-sml" data-toggle="modal" data-target="#newModal" onclick="this.blur()">add new character</button>
 		</nav>
 	</div>
 
 	<ngchargen id="content-wrapper">
 
+<!-- CHARACTER LIST //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+		<div id="chars-container" ng-repeat="char in chargen.chars | orderBy : 'name'">
 
-		<div id="chars-container" ng-repeat="char in chargen.chars">
-
-			<div class="char-thumb" ng-class="{'char-full' : full}">
-				<strong>Name: </strong>{{ char.name }}<br>
-				<strong>Strain: </strong>{{ char.strain }}<br>
-				<span ng-show="show"><strong>Backstory: </strong>{{ char.backstory }}</span><br>
+			<div class="char-thumb" ng-class="{'char-full' : full}" ng-style="{'background-image':'url({{char.imgurl}})'}">
+				<h4><strong>Name: </strong>{{ char.name }}<br>
+				<strong>Strain: </strong>{{ char.strain }}</h4><br>
+				<span ng-show="show"><h4><strong>Backstory: </strong></h4><p class="backstory">{{ char.backstory }}</p></span><br>
 				<button class="btn btn-sml" ng-click="show = !show; full = !full" onclick="this.blur()">
 					<span ng-hide="show">show backstory</span>
 					<span ng-show="show">hide backstory<span>
@@ -68,8 +67,10 @@
 						<input type="text" ng-model="chargen.formCharName"><br>
 						<label>Strain</label>
 						<input type="text" ng-model="chargen.formCharStrain"><br>
+						<label>Image</label>
+						<input type="text" ng-model="chargen.formCharimgURL"><br>
 						<label>Backstory</label><br>
-						<textarea name="Text1" cols="40" rows="5" ng-model="chargen.formCharBackstory" class="backstory"></textarea>
+						<textarea name="Text1" cols="40" rows="5" ng-model="chargen.formCharBackstory" class="backstory-input"></textarea>
 					</form>
 	      </div>
 	      <div class="modal-footer">
@@ -93,8 +94,10 @@
 						<input type="text" ng-model="chargen.formCharName"><br>
 						<label>Strain</label>
 						<input type="text" ng-model="chargen.formCharStrain"><br>
+						<label>Image</label>
+						<input type="text" ng-model="chargen.formCharimgURL"><br>
 						<label>Backstory</label><br>
-						<textarea name="Text1" cols="40" rows="5" ng-model="chargen.formCharBackstory" class="backstory"></textarea>
+						<textarea name="Text1" cols="40" rows="5" ng-model="chargen.formCharBackstory" class="backstory-input"></textarea>
 					</form>
 	      </div>
 	      <div class="modal-footer">

@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var CharSchema = mongoose.Schema({
 	name: String,
 	strain: String,
+	imgurl: String,
 	backstory: String,
 })
 

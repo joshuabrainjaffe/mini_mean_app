@@ -30,16 +30,11 @@ mongoose.connect('mongodb://localhost/char_gen');
 var Book = require('./models/char.js');
 
 
-// =============================
-// Seed - run one and done son!
-// =============================
-// var seed = require('./seed.js');
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ROUTES //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-// =============================
-// Routes
-// =============================
-// Index
+// Index =============================================================//
 app.get('/chars', function(req, res) {
 	Book.find().then(function(chars) {
 		console.log('==================');
@@ -50,7 +45,7 @@ app.get('/chars', function(req, res) {
 	});
 });
 
-// Show - test via POSTMAN (http://localhost:3000/chars/5658a3da895cc0e22913f94a)
+// Show ===============================================================//
 app.get('/chars/:id', function(req, res) {
 	Book.findById(req.params.id).then(function(char) {
 		console.log('==================');
@@ -61,9 +56,7 @@ app.get('/chars/:id', function(req, res) {
 	});
 });
 
-// Create
-//  POSTMAN TEST:
-
+// Create =============================================================//
 app.post('/chars', function(req, res) {
 	var char = new Book(req.body);
 	char.save(function(err) {
@@ -76,12 +69,7 @@ app.post('/chars', function(req, res) {
 	});
 });
 
-// Update
-// 	POSTMAN TEST:
-// 	- _id: "565a1b9abde674c14a5e8a80"
-// 	- title: "War And Reeses Pieces"
-// 	- author: "Leo Tolstoy"
-// 	-	imgURL: "http://images.fashionnstyle.com/data/images/full/64729/war-and-peace.jpg?w=600"
+// Update ==============================================================//
 app.put('/chars/:id', function(req, res) {
 	Book.findOneAndUpdate({
 		_id: req.params.id
@@ -92,7 +80,7 @@ app.put('/chars/:id', function(req, res) {
 	});
 });
 
-// Delete
+// Delete ===============================================================//
 app.delete('/chars/:id', function(req, res) {
 	Book.findOneAndRemove({_id: req.params.id}, function(err) {
 		if(err) console.log(err);
@@ -102,8 +90,8 @@ app.delete('/chars/:id', function(req, res) {
 });
 
 
-// =============================
-// Listen
-// =============================
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// LISTEN //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(port);
 console.log('Server started at port: ' + port);

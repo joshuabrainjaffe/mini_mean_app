@@ -1,31 +1,14 @@
+/* =======================================================================================================================================*/
+/* UNIVERSALE STYLING ====================================================================================================================*/
+/* =======================================================================================================================================*/
+
 body {
 	background-color: black;
 }
 
-/*header {
-	position: fixed;
-	background-color: rgb(65, 1, 66);
-	background-image: url(/images/header_bkgd.png);
-	background-position: bottom;
-	color: white;
-	width: 100%;
-	overflow: inherit;
-	border-bottom: 1px solid black;
-	text-align: center;
-	line-height: 30px;
-}*/
 
-#sidebar {
-    position:fixed;
-    top:0;
-		bottom:0;
-		left:0;
-    width: 80px;
-		height: 200%;
-		padding: 1%;
-    background-color: #342924;
-		background-image: url(/images/sidebar_bkgd.png);
-		background-position: right;
+h2{
+	margin: 0px;
 }
 
 .btn {
@@ -45,6 +28,23 @@ body {
 .btn::after {
 	background-color: #342924;
 	color: white;
+}
+
+/* =======================================================================================================================================*/
+/* SIDEBAR STYLING =======================================================================================================================*/
+/* =======================================================================================================================================*/
+
+#sidebar {
+    position:fixed;
+    top:0;
+		bottom:0;
+		left:0;
+    width: 80px;
+		height: 200%;
+		padding: 1%;
+    background-color: #342924;
+		background-image: url(/images/sidebar_bkgd.png);
+		background-position: right;
 }
 
 nav {
@@ -76,25 +76,48 @@ nav h2{
 	color: white;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	margin: none;
+	padding: none;
+}
+
+/* =======================================================================================================================================*/
+/* BODY STYLING ==========================================================================================================================*/
+/* =======================================================================================================================================*/
+
 #content-wrapper {
 	display: block;
 	padding: 16px 0 0 100px;
-}
-
-h2{
-	margin: 0px;
 }
 
 .char-thumb{
 	position: relative;
 	display: block;
 	background-color: #d5d5d5;
+	background-size: cover;
 	border-radius: 10px;
 	float: left;
 	margin: 10px;
 	padding: 10px;
 	width: 45%;
+	color: white;
+	text-shadow: 2px 2px 4px black;
 }
+
+.char-full{
+	width: 92%;
+}
+
+.backstory{
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 10px;
+	border-radius: 5px;
+}
+
+
+/* =======================================================================================================================================*/
+/* MODAL STYLING =========================================================================================================================*/
+/* =======================================================================================================================================*/
 
 input{
 	width: 90%;
@@ -102,12 +125,8 @@ input{
 	border-bottom: 2px solid black;
 }
 
-.backstory{
+.backstory-input{
 	width: 98%;
 	height: 400px;
 	border: 2px solid black;
-}
-
-.char-full{
-	width: 92%;
 }
