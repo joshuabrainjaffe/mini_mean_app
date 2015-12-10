@@ -10,6 +10,9 @@
 <!-- CSS /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 
+<!-- FONT /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<link href='https://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
+
 <!-- ANGULAR /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
@@ -41,16 +44,15 @@
 			<div class="char-thumb" ng-class="{'char-full' : full}" ng-style="{'background-image':'url({{char.imgurl}})'}">
 				<h4><strong>Name: </strong>{{ char.name }}<br>
 				<strong>Strain: </strong>{{ char.strain }}</h4><br>
-				<span ng-show="show"><h4><strong>Backstory: </strong></h4><p class="backstory">{{ char.backstory }}</p></span><br>
+				<span ng-show="show"><h4><strong>Backstory: </strong></h4><p class="backstory">{{ char.backstory }}</p>
+					<button class="btn btn-sml" data-toggle="modal" data-target="#editModal" ng-click="chargen.populateForm(char);" onclick="this.blur()">edit</button>
+					<button class="btn btn-sml" ng-click="chargen.deleteChar(char)" onclick="this.blur()">delete</button>
+				</span><br>
 				<button class="btn btn-sml" ng-click="show = !show; full = !full" onclick="this.blur()">
-					<span ng-hide="show">show backstory</span>
-					<span ng-show="show">hide backstory<span>
+					<span ng-hide="show">show</span>
+					<span ng-show="show">hide<span>
 				</button><br>
 
-				<button class="btn btn-sml" data-toggle="modal" data-target="#editModal" ng-click="chargen.populateForm(char);" onclick="this.blur()">
-				  edit
-				</button>
-				<button class="btn btn-sml" ng-click="chargen.deleteChar(char)" onclick="this.blur()">delete</button>
 			</div>
 		</div>
 
